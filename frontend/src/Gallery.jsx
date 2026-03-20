@@ -86,6 +86,7 @@ export default function Gallery() {
         setPageToken(null);
         pageTokenRef.current = null;
         setSelected(new Set());
+        loadingRef.current = false;
         fetchItems(null, controller.signal);
 
         return () => controller.abort();
