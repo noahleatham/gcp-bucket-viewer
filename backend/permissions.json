@@ -1,0 +1,17 @@
+{
+  "_docs": {
+    "format": "email: [rules]",
+    "rules": [
+      "[\"*\"] = admin, full access to all ALLOWED_BUCKETS",
+      "[\"bucket-name\"] = full access to that bucket",
+      "[\"bucket-name/prefix/\"] = access restricted to that prefix and sub-paths",
+      "Multiple rules can be combined, e.g. [\"bucket-a\", \"bucket-b/photos/\"]"
+    ]
+  },
+  "noahleatham@gmail.com": ["*"],
+  "dev@example.com": ["*"],
+  "etheringtonmadison@gmail.com": ["*"],
+  "n.leatham@das42.com": ["fujifilm-photos"],
+  "pmthompson3@gmail.com": ["gopro-diving-videos-backup/Belize 07-05-25/"],
+  "_example_friend@example.com": ["fujifilm-photos/05012025_dump/", "gopro-diving-videos-backup"]
+}
