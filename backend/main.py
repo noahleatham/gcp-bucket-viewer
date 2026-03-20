@@ -159,11 +159,11 @@ async def download_batch(
     bucket_name: str = Query(..., description="Bucket name"),
     user: dict = Depends(verify_google_token)
 ):
-    if not check_user_access(user["email"], bucket_name):
-        raise HTTPException(status_code=403, detail="Access denied")
-
     if not files:
         raise HTTPException(status_code=400, detail="No files specified")
+
+    if any(not check_user_access(user["email"], bucket_name, f) for f in files):
+        raise HTTPException(status_code=403, detail="Access denied")
 
     if len(files) > 50:
         raise HTTPException(status_code=400, detail="Too many files for batch download (max 50)")

@@ -123,7 +123,7 @@ export default function Gallery() {
         if (selectedList.length === 1) {
             const fileName = selectedList[0];
             const token = user?.token;
-            const url = `${apiBase}/api/stream/${encodeURIComponent(fileName)}?bucket_name=${currentBucket}&token=${token}`;
+            const url = `${apiBase}/api/stream/${fileName.split('/').map(encodeURIComponent).join('/')}?bucket_name=${currentBucket}&token=${token}`;
 
             const link = document.createElement('a');
             link.href = url;
@@ -440,7 +440,7 @@ const PreviewModal = ({ item, onClose, apiBase, bucket }) => {
 
     useEffect(() => {
         const token = user?.token;
-        setMediaUrl(`${apiBase}/api/stream/${encodeURIComponent(item.name)}?bucket_name=${bucket}&token=${token}`);
+        setMediaUrl(`${apiBase}/api/stream/${item.name.split('/').map(encodeURIComponent).join('/')}?bucket_name=${bucket}&token=${token}`);
         setLoading(false);
 
         return () => {
@@ -493,7 +493,7 @@ const PreviewModal = ({ item, onClose, apiBase, bucket }) => {
                 <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-neutral-900/80 backdrop-blur-md px-4 py-2 rounded-full border border-neutral-700 flex items-center gap-4">
                     <p className="text-sm font-medium text-white truncate max-w-[200px]">{item.name.split('/').pop()}</p>
                     <a
-                        href={`${apiBase}/api/stream/${encodeURIComponent(item.name)}?bucket_name=${bucket}&token=${user?.token}`}
+                        href={`${apiBase}/api/stream/${item.name.split('/').map(encodeURIComponent).join('/')}?bucket_name=${bucket}&token=${user?.token}`}
                         download={item.name.split('/').pop()}
                         className="text-neutral-400 hover:text-white transition-colors flex items-center gap-2"
                     >
